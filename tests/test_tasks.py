@@ -1,6 +1,6 @@
 import unittest
 
-from tasks import agregar_tarea, completar_tarea, pendientes
+from tasks import agregar_tarea, completar_tarea, eliminar_tarea, pendientes
 
 
 class TestTasks(unittest.TestCase):
@@ -40,6 +40,24 @@ class TestTasks(unittest.TestCase):
         resultado = pendientes(tareas, "inexistente")
 
         self.assertEqual(resultado, [])
+
+    def test_eliminar_tarea(self):
+        tareas = []
+        agregar_tarea(tareas, "Practicar Python", "Estudio")
+        tarea_eliminada = agregar_tarea(tareas, "Comprar cuaderno", "Personal")
+        agregar_tarea(tareas, "Hacer ejercicio", "Salud")
+
+        resultado = eliminar_tarea(tareas, 2)
+
+        self.assertEqual(resultado, tarea_eliminada)
+        self.assertEqual([t["id"] for t in tareas], [1, 3])
+
+    def test_eliminar_tarea_id_inexistente(self):
+        tareas = []
+        agregar_tarea(tareas, "Practicar Python", "Estudio")
+
+        with self.assertRaisesRegex(ValueError, "Tarea no encontrada"):
+            eliminar_tarea(tareas, 999)
 
 
 if __name__ == "__main__":
