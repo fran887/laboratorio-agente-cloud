@@ -1,0 +1,33 @@
+--- fran887 @ 2026-10-26T22:02:14Z
+@copilot Revisión del PR: encontré un caso no cubierto que rompe la unicidad de los `id`.
+
+Reproducción sobre esta rama:
+
+```python
+t = []
+agregar_tarea(t, "A", "x")
+agregar_tarea(t, "B", "x")
+agregar_tarea(t, "C", "x")
+eliminar_tarea(t, 2)
+agregar_tarea(t, "D", "x")
+print([x["id"] for x in t])   # [1, 3, 3] -> id duplicado
+```
+
+Causa: `agregar_tarea` calcula `id = len(tareas) + 1`, y al eliminar la lista se acorta.
+
+Solicito en el mismo Pull Request:
+
+1. Generar el `id` sin colisiones (por ejemplo `max(ids existentes) + 1`, o reutilizar el hueco solo si no se duplica).
+2. Agregar una prueba de regresión: eliminar una tarea y luego agregar otra no debe duplicar ningún `id`.
+3. Mantener la firma pública de `eliminar_tarea` y no agregar dependencias.
+4. Al terminar, marca el PR como listo para revisión.
+
+Actualiza este mismo Pull Request.
+
+--- copilot-swe-agent @ 2026-10-26T22:05:05Z
+
+> @copilot Revisión del PR: encontré un caso no cubierto que rompe la unicidad de los `id`.
+> 
+> Reproducción sobre esta rama:...
+
+He aplicado la corrección en `06019ca`: ahora `agregar_tarea` asigna `id` como `max(ids)+1` para evitar colisiones tras eliminaciones, y agregué la prueba de regresión `test_agregar_tarea_no_duplica_id_despues_de_eliminar`. Ya quedó listo para revisión.

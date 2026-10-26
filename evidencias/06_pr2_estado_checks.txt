@@ -1,0 +1,7 @@
+{"author":{"is_bot":true,"login":"app/copilot-swe-agent"},"headRefName":"copilot/agregar-categorias-y-filtrado","isDraft":false,"mergeCommit":{"oid":"b352b7286d02174106f74411aab19a9991e72ef0"},"state":"MERGED"}
+
+completed	success	Merge pull request #2 from fran887/copilot/agregar-categorias-y-filtrado	tests	main	push	40406853460	9s	2026-10-26T21:44:19Z
+completed	failure	Agregar categoría obligatoria en tareas y filtrado de pendientes por categoría	tests	copilot/agregar-categorias-y-filtrado	pull_request	40406658534	1m25s	2026-10-26T21:42:52Z
+completed	failure	Agregar categoría obligatoria en tareas y filtrado de pendientes por categoría	tests	copilot/agregar-categorias-y-filtrado	pull_request	40406425263	1m38s	2026-10-26T21:41:10Z
+completed	success	Addressing comment on PR #2	Copilot cloud agent	copilot/agregar-categorias-y-filtrado	dynamic	40406215481	2m23s	2026-10-26T21:39:41Z
+completed	failure	Agregar categoría obligatoria en tareas y filtrado de pendientes por categoría	tests	copilot/agregar-categorias-y-filtrado	pull_request	40401979173	33m8s	2026-10-26T21:09:40Z

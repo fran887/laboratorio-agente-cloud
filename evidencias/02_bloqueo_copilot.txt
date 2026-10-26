@@ -1,0 +1,5 @@
+$ gh agent-task create --base main "Implementa el issue #1"
+> POST /graphql HTTP/1.1
+> POST /agents/swe/v1/jobs/lallolapalooza/laboratorio-agente-cloud HTTP/1.1
+{"errors":null,"message":"Forbidden"}
+failed to create job: 403 Forbidden: Forbidden

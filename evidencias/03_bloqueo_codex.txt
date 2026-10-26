@@ -1,0 +1,4 @@
+$ curl /wham/environments (Codex Cloud, cuenta CLI)
+[]
+$ curl /wham/environments/by-repo/github/lallolapalooza/laboratorio-agente-cloud
+{"detail":{"type":"environment_repo_access_failed","message":"Codex can’t access this repository. Confirm Codex has access on GitHub and try again.","repo_full_name":"lallolapalooza/laboratorio-agente-cloud"}}

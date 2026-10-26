@@ -1,0 +1,12 @@
+completed	success	Merge pull request #4 from fran887/copilot/agregar-funcion-eliminar-t…	tests	main	push	40409689587	9s	2026-10-26T22:05:23Z
+completed	action_required	Agregar eliminación de tareas por ID con manejo explícito de no encontrado	tests	copilot/agregar-funcion-eliminar-tarea	pull_request	40409638070	0s	2026-10-26T22:05:00Z
+completed	cancelled	Addressing comment on PR #4	Copilot cloud agent	copilot/agregar-funcion-eliminar-tarea	dynamic	40409290637	3m12s	2026-10-26T22:02:23Z
+completed	action_required	Agregar eliminación de tareas por ID con manejo explícito de no encontrado	tests	copilot/agregar-funcion-eliminar-tarea	pull_request	40407263202	0s	2026-10-26T21:47:15Z
+completed	success	Running Copilot cloud agent	Copilot cloud agent	copilot/agregar-funcion-eliminar-tarea	dynamic	40407053610	3m40s	2026-10-26T21:45:43Z
+completed	action_required	Agregar eliminación de tareas por ID con manejo explícito de no encontrado	tests	copilot/agregar-funcion-eliminar-tarea	pull_request	40407053380	0s	2026-10-26T21:45:43Z
+completed	success	Merge pull request #2 from fran887/copilot/agregar-categorias-y-filtrado	tests	main	push	40406853460	9s	2026-10-26T21:44:19Z
+completed	failure	Agregar categoría obligatoria en tareas y filtrado de pendientes por categoría	tests	copilot/agregar-categorias-y-filtrado	pull_request	40406658534	1m25s	2026-10-26T21:42:52Z
+completed	failure	Agregar categoría obligatoria en tareas y filtrado de pendientes por categoría	tests	copilot/agregar-categorias-y-filtrado	pull_request	40406425263	1m38s	2026-10-26T21:41:10Z
+completed	success	Addressing comment on PR #2	Copilot cloud agent	copilot/agregar-categorias-y-filtrado	dynamic	40406215481	2m23s	2026-10-26T21:39:41Z
+
+{"author":{"is_bot":true,"login":"app/copilot-swe-agent"},"headRefName":"copilot/agregar-funcion-eliminar-tarea","mergeCommit":{"oid":"943456cfa18600a9627d8924e5a32abc152213ef"},"state":"MERGED"}

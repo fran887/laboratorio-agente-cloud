@@ -1,0 +1,146 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+new file mode 100644
+index 0000000..7e009dd
+--- /dev/null
++++ b/.github/workflows/tests.yml
+@@ -0,0 +1,17 @@
++name: tests
++
++on:
++  push:
++    branches: [main]
++  pull_request:
++
++jobs:
++  unittest:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: "3.x"
++      - name: Ejecutar pruebas
++        run: python -m unittest discover -s tests -v
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..7a60b85
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,2 @@
++__pycache__/
++*.pyc
+diff --git a/__pycache__/tasks.cpython-314.pyc b/__pycache__/tasks.cpython-314.pyc
+deleted file mode 100644
+index 171ba40..0000000
+Binary files a/__pycache__/tasks.cpython-314.pyc and /dev/null differ
+diff --git a/app.py b/app.py
+index f1c1536..e54220f 100644
+--- a/app.py
++++ b/app.py
+@@ -1,8 +1,8 @@
+ from tasks import agregar_tarea, completar_tarea, pendientes
+ 
+ tareas = []
+-agregar_tarea(tareas, "Estudiar agentes cloud")
+-agregar_tarea(tareas, "Preparar laboratorio")
++agregar_tarea(tareas, "Estudiar agentes cloud", "estudio")
++agregar_tarea(tareas, "Preparar laboratorio", "trabajo")
+ completar_tarea(tareas, 1)
+ 
+ for tarea in pendientes(tareas):
+diff --git a/error.log b/error.log
+new file mode 100644
+index 0000000..63f5ab9
+--- /dev/null
++++ b/error.log
+@@ -0,0 +1,3 @@
++[2026-10-26T20:51:08.706171910+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
++[2026-10-26T20:51:08.706260609+00:00] auth: mode=ChatGPT account_id=86161841-ec9b-4474-abdb-4eb12300f300
++[2026-10-26T20:51:08.706299092+00:00] auth: set ChatGPT-Account-Id header: 86161841-ec9b-4474-abdb-4eb12300f300
+diff --git a/tasks.py b/tasks.py
+index 6f11288..f35ecee 100644
+--- a/tasks.py
++++ b/tasks.py
+@@ -1,8 +1,16 @@
+-def agregar_tarea(tareas, titulo):
++def agregar_tarea(tareas, titulo, categoria):
+     titulo = titulo.strip()
+     if not titulo:
+         raise ValueError("El título es obligatorio")
+-    tarea = {"id": len(tareas) + 1, "titulo": titulo, "completada": False}
++    categoria = categoria.strip()
++    if not categoria:
++        raise ValueError("La categoría es obligatoria")
++    tarea = {
++        "id": len(tareas) + 1,
++        "titulo": titulo,
++        "categoria": categoria,
++        "completada": False,
++    }
+     tareas.append(tarea)
+     return tarea
+ 
+@@ -15,5 +23,9 @@ def completar_tarea(tareas, tarea_id):
+     raise ValueError("Tarea no encontrada")
+ 
+ 
+-def pendientes(tareas):
+-    return [t for t in tareas if not t["completada"]]
++def pendientes(tareas, categoria=None):
++    tareas_pendientes = [t for t in tareas if not t["completada"]]
++    if categoria is None:
++        return tareas_pendientes
++    categoria = categoria.strip().lower()
++    return [t for t in tareas_pendientes if t["categoria"].lower() == categoria]
+diff --git a/tests/__pycache__/test_tasks.cpython-314.pyc b/tests/__pycache__/test_tasks.cpython-314.pyc
+deleted file mode 100644
+index 4462274..0000000
+Binary files a/tests/__pycache__/test_tasks.cpython-314.pyc and /dev/null differ
+diff --git a/tests/test_tasks.py b/tests/test_tasks.py
+index 5845388..5d197d7 100644
+--- a/tests/test_tasks.py
++++ b/tests/test_tasks.py
+@@ -6,16 +6,41 @@ from tasks import agregar_tarea, completar_tarea, pendientes
+ class TestTasks(unittest.TestCase):
+     def test_agregar_tarea(self):
+         tareas = []
+-        tarea = agregar_tarea(tareas, "Leer documentación")
++        tarea = agregar_tarea(tareas, "Leer documentación", "Estudio")
+         self.assertEqual(tarea["titulo"], "Leer documentación")
++        self.assertEqual(tarea["categoria"], "Estudio")
+         self.assertFalse(tarea["completada"])
+ 
++    def test_agregar_tarea_categoria_vacia(self):
++        tareas = []
++        with self.assertRaises(ValueError):
++            agregar_tarea(tareas, "Leer documentación", "   ")
++
+     def test_completar_tarea(self):
+         tareas = []
+-        agregar_tarea(tareas, "Practicar")
++        agregar_tarea(tareas, "Practicar", "Estudio")
+         completar_tarea(tareas, 1)
+         self.assertEqual(pendientes(tareas), [])
+ 
++    def test_pendientes_filtra_por_categoria_sin_mayusculas(self):
++        tareas = []
++        agregar_tarea(tareas, "Practicar Python", "Estudio")
++        agregar_tarea(tareas, "Comprar cuaderno", "personal")
++        completar_tarea(tareas, 2)
++
++        resultado = pendientes(tareas, "eStUdIo")
++
++        self.assertEqual(len(resultado), 1)
++        self.assertEqual(resultado[0]["titulo"], "Practicar Python")
++
++    def test_pendientes_categoria_inexistente(self):
++        tareas = []
++        agregar_tarea(tareas, "Practicar Python", "Estudio")
++
++        resultado = pendientes(tareas, "inexistente")
++
++        self.assertEqual(resultado, [])
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

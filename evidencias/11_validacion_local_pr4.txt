@@ -1,0 +1,17 @@
+$ python3 app.py
+-2: Preparar laboratorio
+
+$ python3 -m unittest discover -s tests -v
+test_agregar_tarea (test_tasks.TestTasks.test_agregar_tarea) ... ok
+test_agregar_tarea_categoria_vacia (test_tasks.TestTasks.test_agregar_tarea_categoria_vacia) ... ok
+test_agregar_tarea_no_duplica_id_despues_de_eliminar (test_tasks.TestTasks.test_agregar_tarea_no_duplica_id_despues_de_eliminar) ... ok
+test_completar_tarea (test_tasks.TestTasks.test_completar_tarea) ... ok
+test_eliminar_tarea (test_tasks.TestTasks.test_eliminar_tarea) ... ok
+test_eliminar_tarea_id_inexistente (test_tasks.TestTasks.test_eliminar_tarea_id_inexistente) ... ok
+test_pendientes_categoria_inexistente (test_tasks.TestTasks.test_pendientes_categoria_inexistente) ... ok
+test_pendientes_filtra_por_categoria_sin_mayusculas (test_tasks.TestTasks.test_pendientes_filtra_por_categoria_sin_mayusculas) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

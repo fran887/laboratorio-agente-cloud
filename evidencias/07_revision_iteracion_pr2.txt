@@ -1,0 +1,23 @@
+--- fran887 @ 2026-10-26T21:39:30Z
+@copilot Antes de integrar este PR:
+
+1. Agrega una prueba que compruebe que `pendientes(tareas, "inexistente")` devuelve una lista vacía.
+2. Elimina del PR los archivos `__pycache__/tasks.cpython-312.pyc` y `tests/__pycache__/test_tasks.cpython-312.pyc`, y agrega un `.gitignore` con `__pycache__/` y `*.pyc` para que no vuelvan a aparecer.
+3. No cambies la API pública ni agregues dependencias.
+4. Al terminar, marca el Pull Request como listo para revisión (`Ready for review`).
+
+Actualiza el mismo Pull Request.
+
+--- copilot-swe-agent @ 2026-10-26T21:41:44Z
+
+> @copilot Antes de integrar este PR:
+> 
+> 1. Agrega una prueba que compruebe que `pendientes(tareas, "inexistente")` devuelve una lista vacía....
+
+Hecho en el commit `e80c9e1`.
+
+- Agregué la prueba `test_pendientes_categoria_inexistente` para validar que `pendientes(tareas, "inexistente")` devuelve `[]`.
+- Eliminé los `.pyc` del repositorio y añadí `.gitignore` con `__pycache__/` y `*.pyc`.
+- No cambié la API pública ni agregué dependencias.
+
+Sobre `Ready for review`: no tengo una herramienta disponible aquí para cambiar ese estado del PR directamente.
