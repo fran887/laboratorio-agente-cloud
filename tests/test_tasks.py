@@ -52,6 +52,19 @@ class TestTasks(unittest.TestCase):
         self.assertEqual(resultado, tarea_eliminada)
         self.assertEqual([t["id"] for t in tareas], [1, 3])
 
+
+    def test_agregar_tarea_no_duplica_id_despues_de_eliminar(self):
+        tareas = []
+        agregar_tarea(tareas, "A", "x")
+        agregar_tarea(tareas, "B", "x")
+        agregar_tarea(tareas, "C", "x")
+
+        eliminar_tarea(tareas, 2)
+        nueva_tarea = agregar_tarea(tareas, "D", "x")
+
+        self.assertEqual(nueva_tarea["id"], 4)
+        self.assertEqual([t["id"] for t in tareas], [1, 3, 4])
+
     def test_eliminar_tarea_id_inexistente(self):
         tareas = []
         agregar_tarea(tareas, "Practicar Python", "Estudio")
